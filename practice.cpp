@@ -41,11 +41,55 @@ struct student {
 
 using my_lib::People;
 
+void swap(int &a, int &b) {
+    a ^= b;
+    b ^= a;
+    a ^= b;
+    return ;
+}
+
+int &f() {
+    int a = 1;
+    int &b = a;
+    return b;
+}
+
+int add() {
+    return 1;
+}
+
+int add(int a, int b) {
+    return a + b;
+}
+
+
 int main() {
-    People p("gpx");
-    cout << p.getName() << endl;
+    /*
+    People people("gpx");
+    cout << people.getName() << endl;
     People *p1 = new People("gpx1");
     cout << p1->getName() << endl;
     delete p1;
+    
+    const int a = 5;
+    int *p = (int *)&a;
+    *p = 6;
+    cout << a << ", " << *p << endl;
+
+    int a = 1, b = 2;
+    (a > b ? a : b) = 3;
+    cout << a << " " << b << endl;
+    int c = f();
+    cout << c << endl;
+    swap(a, b);
+    cout << a << " " << b << endl;
+    */
+    
+    int (*p1)(int, int);
+    int (*p2)();
+    p1 = add;
+    p2 = add;
+    printf("%p, %p\n", p1, p2);
+    
     return 0;
 }
