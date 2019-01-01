@@ -7,11 +7,13 @@
 
 #include <iostream>
 #include <string>
+#include "operator.h"
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+
 
 namespace my_lib {
     class People {
@@ -62,6 +64,28 @@ int add(int a, int b) {
     return a + b;
 }
 
+class Test {
+    private :
+        int i;
+        int j;
+    public:
+        int a;
+    int getI() {
+        return i;
+    }
+    int getJ() {
+        return j;
+    }
+    int getA() {
+        return a;
+    }
+    void setI(int value) {
+        i = value;
+        return ;
+    }
+} ;
+
+Test q;
 
 int main() {
     /*
@@ -85,11 +109,36 @@ int main() {
     cout << a << " " << b << endl;
     */
     
+    /*
     int (*p1)(int, int);
     int (*p2)();
     p1 = add;
     p2 = add;
     printf("%p, %p\n", p1, p2);
-    
+    */
+
+    /*
+    Test t, *t1 = new Test;
+    t.a = 5;
+    t1->a = 10;
+    t.setI(10);
+    cout << t.a << " " << t1->a << endl;
+    delete t1;
+    */
+
+    /*
+    Operator o;
+    double r = 0;
+    o.setOp('-');
+    o.setValue(3.13, 4.35);
+    o.result(r);
+    cout << r << endl;
+    */
+
+    cout << q.getA() << endl;
+    Test t;
+    cout << t.getA() << endl;
+    Test *p = new Test();
+    cout << p->getA() << endl;
     return 0;
 }
