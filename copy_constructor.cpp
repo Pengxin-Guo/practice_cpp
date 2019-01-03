@@ -48,6 +48,7 @@ class Test {
 int main() {
     Test t1(2);
     Test t2 = t1;
+    cout << "t1:" << &t1 << "  t2:" << &t2 << endl;
     cout << t1.get() << " " << t1.getP() << endl;
     cout << t1.get() << " " << t2.getP() << endl;
     t1.free();
