@@ -33,7 +33,7 @@ private :
     int m_x;
     int m_y;
 public :
-    Point(int x, int y) {
+    Point(int x = 0, int y = 0) {
         m_x = x;
         m_y = y;
         m_name = "Point";
@@ -54,9 +54,9 @@ private :
     Point m_p1;
     Point m_p2;
 public :
-    Line(Point &p1, Point &p2) : m_p1(p1), m_p2(p2) {
-        //m_p1 = p1;
-        //m_p2 = p2;
+    Line(Point &p1, Point &p2) {
+        m_p1 = p1;
+        m_p2 = p2;
         m_name = "Line";
         ostringstream s;
         s << "Line from " << m_p1.info() << " to " << m_p2.info();
