@@ -8,29 +8,35 @@
 #include <iostream>
 using namespace std;
 
-class A {
-    private :
-        string name;
-        int age;
-    public :
-        void print() { 
-            cout << name << " " << age << endl;
-        }
+class People {
+    private:
+    string name;
+    int age;
+    public:
+    People(string s1, int v1) : name(s1), age(v1) {}
+    void print() {
+        cout << "name = " << name << " age = " << age << endl;
+    }
 };
-class B : public A {};
-class C : public A {};
-class D : public B, public C {};
+
+class Teacher : virtual public People {
+    public:
+    Teacher(string s1, int v1) : People(s1, v1) {}
+};
+
+class Student : virtual public People {
+    public:
+    Student(string s1, int v1) : People(s1, v1) {}
+};
+
+class Doctor : public Teacher, public Student {
+    public:
+    Doctor(string s1, int v1) : Teacher(s1 + "1", v1 + 1), Student(s1 + "2", v1 + 2), People(s1, v1) {}
+};
 
 int main() {
-    D d;
-    cout << &d << endl;
-    B *pb = &d;
-    C *pc = &d;
-    cout << pb << " " << pc << endl;
-    void *pbb = pb;
-    void *pcc = pc;
-    cout << pbb << " " << pcc << endl;
-    d.B::print();
-    d.C::print();
+    Doctor d("qqq", 28);
+    d.Teacher::print();
+    d.Student::print();
     return 0;
 }
