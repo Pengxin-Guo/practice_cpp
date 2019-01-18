@@ -6,6 +6,7 @@
 ************************************************************************/
 
 #include <iostream>
+#include <cstring>
 
 using std::cin;
 using std::cout;
@@ -16,13 +17,25 @@ private:
     int *data;
     int length;
 public:
-    Array() {
-        length = 10;
-        data = new int[length];
-    }
-    Array(int len) {
+    Array(int len = 0) {
         length = len;
         data = new int[length];
+        memset(data, 0, sizeof(0));
+    }
+    Array& operator=(const Array &obj) {
+    // 深拷贝
+        if (this != &obj) {
+            int *p = new int[obj.length];
+            if (p) {
+                for (int i = 0; i < obj.length; i++) {
+                    p[i] = obj.data[i];
+                }
+            }
+            this->length = obj.length;
+            delete[] data;
+            data = p;
+        }
+        return *this;
     }
     int getLength() {
         return length;
@@ -34,6 +47,13 @@ public:
         }
         return data[ind];
     }
+    int& operator[](int ind) {
+        if (ind >= 0 && ind < length) {
+            return data[ind];
+        } else {
+            throw;
+        }
+    }
     bool setValue(int ind, int value) {
         if (ind >= length || ind < 0) {
             cout << "setValue " << ind << " segment faule " << endl;
@@ -43,12 +63,14 @@ public:
         cout << "setValue " << ind << " success!" << endl;
         return true;
     }
+    
     ~Array() {
         delete []data;
     }
 } ;
 
 int main() {
+    /*
     Array arr;
     Array arr1(20);
     cout << "arr.length : " << arr.getLength() << endl;
@@ -60,5 +82,24 @@ int main() {
     arr1.setValue(21, 10);
     cout << "arr1.data[5] : " << arr1.getValue(5) << endl;
     cout << "arr1.data[25] : " << arr1.getValue(25) << endl;
+    */
+    Array a1(5);
+    for (int i = 0; i < a1.getLength(); i++) {
+        //a1.setValue(i, i + 1);
+        a1[i] = i + 1;
+    }
+    for (int i = 0; i < a1.getLength(); i++) {
+        cout << a1[i] << " ";
+    }
+    cout << endl;
+    Array a2(10);
+    for (int i = 0; i < a2.getLength(); i++) {
+        a2[i] = i + 1;
+    }
+    a1 = a2;
+    for (int i = 0; i < a1.getLength(); i++) {
+        cout << a1.getValue(i) << " ";
+    }
+    cout << endl;
     return 0;
 }
