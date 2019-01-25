@@ -7,6 +7,7 @@
 // []重载
 // 1.只能重载为成员函数
 // 2.只能有1个参数
+// 3.返回的是一个引用（因为它可以当左值用）
 
 #include <iostream>
 using namespace std;
