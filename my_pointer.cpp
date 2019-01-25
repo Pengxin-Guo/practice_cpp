@@ -4,6 +4,9 @@
 	> Mail: 1457495424@qq.com
 	> Created Time: 2019年01月21日 星期一 18时38分47秒
  ************************************************************************/
+// -> 和 * 重载
+// 1.只能重载为成员函数
+// 2.不能有参数
 
 #include <iostream>
 using namespace std;
@@ -34,10 +37,10 @@ class SmartPoint {
         return *mp;
     }
     SmartPoint& operator=(const SmartPoint &obj) {
-        if (this != &obj) {
+        if (this != &obj) {  // 防止自赋值
             delete mp;
             mp = obj.mp;
-            const_cast<SmartPoint &>(obj).mp = NULL;
+            const_cast<SmartPoint &>(obj).mp = NULL; // 防止两个指针指向同一地址空间
         }
         return *this;
     }
@@ -48,7 +51,7 @@ class SmartPoint {
 
 int main() {
     for (int i = 0; i < 5; i++) {
-        SmartPoint p = new Test(i);
+        SmartPoint p = new Test(i);  // 等价于 SmartPoint p(new Test(i));
         cout << p->getI() << endl;
     }
     SmartPoint p1(new Test(1));
